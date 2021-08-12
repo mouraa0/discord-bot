@@ -2,6 +2,7 @@ import os
 import discord
 import json
 import bot_economy
+import bot_games
 from dotenv import load_dotenv
 from discord import client
 from discord.ext import commands
@@ -50,6 +51,15 @@ async def banco_transferir(ctx, qtd, *, nome:discord.Member):
     user = [ctx.author.id, ctx.author.name, ctx.author.mention]
     dados_recebe = [str(nome.id), nome.name, nome.mention]
     resposta = bot_economy.banqueiro_transferir(user, qtd, dados_recebe)
+    
     await ctx.send(f'Transferência concluída!\n{resposta[0]}\n{resposta[1]}')
+
+@client.command()
+async def jogo_dados(ctx, escolha, qtd):
+    user = [ctx.author.id, ctx.author.name, ctx.author.mention]
+    resposta = bot_games.jogatina_dados(user, escolha, qtd)
+    
+    await ctx.send(resposta)
+
 
 client.run(token)
