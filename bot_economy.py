@@ -46,3 +46,16 @@ def banqueiro_adicionar(usuario, qtd):
         json.dump(geral, f, indent=2)
     
     return f'{qtd} {CURRENCY} adicionadas a conta de {usuario[2]}'
+
+def banqueiro_transferir(usuario, qtd, membro):
+    geral = banqueiro_geral()
+    if str(usuario[0]) not in geral:
+        return f'Você ainda não se cadastrou :('
+    elif str(membro[0]) not in geral:
+        return f'{membro[1]} ainda não se cadastrou :('
+    else:
+        resposta = []
+        resposta.append(banqueiro_retirar(usuario, qtd))
+        resposta.append(banqueiro_adicionar(membro, qtd))
+
+        return resposta
