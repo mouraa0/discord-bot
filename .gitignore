@@ -2,3 +2,4 @@
 .env
 __pycache__/bot_economy.cpython-39.pyc
 __pycache__/bot_games.cpython-39.pyc
+banco.json
