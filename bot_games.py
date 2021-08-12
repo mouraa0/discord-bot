@@ -16,4 +16,3 @@ def jogatina_dados(usuario, escolha, q):
         resposta.append(bot_economy.banqueiro_retirar(usuario, q))
     
     return f'Você {resposta[0]}\n{resposta[1]}'
-''
