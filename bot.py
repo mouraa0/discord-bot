@@ -12,6 +12,9 @@ token = os.environ.get('discord_token')
 owner = os.environ.get('id')
 client = commands.Bot(command_prefix = '.')
 
+def checar(ctx):
+    return ctx.author.id == int(owner)
+
 @client.event
 async def on_ready():
     print('Bot is ready')
@@ -52,7 +55,7 @@ async def banco_transferir(ctx, qtd, *, nome:discord.Member):
     dados_recebe = [str(nome.id), nome.name, nome.mention]
     resposta = bot_economy.banqueiro_transferir(user, qtd, dados_recebe)
     
-    await ctx.send(f'Transferência concluída!\n{resposta[0]}\n{resposta[1]}')
+    await ctx.send(resposta)
 
 @client.command()
 async def jogo_dados(ctx, escolha, qtd):
@@ -60,6 +63,12 @@ async def jogo_dados(ctx, escolha, qtd):
     resposta = bot_games.jogatina_dados(user, escolha, qtd)
     
     await ctx.send(resposta)
+
+@client.command()
+async def banco_reset(ctx, *, nome:discord.Member):
+    user = str(nome.id)
+    bot_economy.banqueiro_resetar(user)
+    await ctx.send('resetado')
 
 
 client.run(token)

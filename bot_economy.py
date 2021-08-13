@@ -8,6 +8,14 @@ def banqueiro_geral():
     
     return geral
 
+def segurança_do_banco(qtd, usuario=None):
+    geral = banqueiro_geral()
+    if int(qtd) < 0:
+        return True
+    
+    if usuario != None:
+        if int(qtd) > geral[str(usuario[0])]['quantia']:
+            return True
 
 def banqueiro_registro(usuario):
     geral = banqueiro_geral()
@@ -48,14 +56,21 @@ def banqueiro_adicionar(usuario, qtd):
     return f'{qtd} {CURRENCY} adicionadas a conta de {usuario[2]}'
 
 def banqueiro_transferir(usuario, qtd, membro):
+    condicao = segurança_do_banco(qtd, usuario)
+    if condicao is True:
+        return 'Problema :('
     geral = banqueiro_geral()
-    if str(usuario[0]) not in geral:
-        return f'Você ainda não se cadastrou :('
-    elif str(membro[0]) not in geral:
-        return f'{membro[1]} ainda não se cadastrou :('
-    else:
-        resposta = []
-        resposta.append(banqueiro_retirar(usuario, qtd))
-        resposta.append(banqueiro_adicionar(membro, qtd))
+    
+    resposta = []
+    resposta.append(banqueiro_retirar(usuario, qtd))
+    resposta.append(banqueiro_adicionar(membro, qtd))
 
-        return resposta
+    return f'Transferência concluída!\n{resposta[0]}\n{resposta[1]}'
+
+def banqueiro_resetar(usuario):
+    geral = banqueiro_geral()
+    geral[str(usuario)]['quantia'] = 100
+
+    with open('banco.json', 'w') as f:
+        json.dump(geral, f, indent=2)
+

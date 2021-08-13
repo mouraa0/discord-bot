@@ -1,8 +1,14 @@
 import bot_economy
 from random import randint
+
 def jogatina_dados(usuario, escolha, q):
+    condicao = bot_economy.segurança_do_banco(q)
+    if condicao is True:
+        return 'Problema :('
+    
     resposta = []
     decisao = randint(1,6)
+    
     if decisao % 2 == 0:
         resultado = 'par'
     else:
