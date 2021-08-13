@@ -3,8 +3,8 @@ from random import randint
 
 def jogatina_dados(usuario, escolha, q):
     condicao = bot_economy.segurança_do_banco(q)
-    if condicao is True:
-        return 'Problema :('
+    if condicao[0] is True:
+        return condicao[1]
     
     resposta = []
     decisao = randint(1,6)

@@ -11,11 +11,13 @@ def banqueiro_geral():
 def segurança_do_banco(qtd, usuario=None):
     geral = banqueiro_geral()
     if int(qtd) < 0:
-        return True
+        return [True,'Apenas valores positivos']
     
     if usuario != None:
         if int(qtd) > geral[str(usuario[0])]['quantia']:
-            return True
+            return [True, 'Faltou pinto']
+    
+    return [False, '']
 
 def banqueiro_registro(usuario):
     geral = banqueiro_geral()
@@ -57,8 +59,8 @@ def banqueiro_adicionar(usuario, qtd):
 
 def banqueiro_transferir(usuario, qtd, membro):
     condicao = segurança_do_banco(qtd, usuario)
-    if condicao is True:
-        return 'Problema :('
+    if condicao[0] is True:
+        return condicao[1]
     geral = banqueiro_geral()
     
     resposta = []

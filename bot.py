@@ -65,6 +65,7 @@ async def jogo_dados(ctx, escolha, qtd):
     await ctx.send(resposta)
 
 @client.command()
+@commands.check(checar)
 async def banco_reset(ctx, *, nome:discord.Member):
     user = str(nome.id)
     bot_economy.banqueiro_resetar(user)
