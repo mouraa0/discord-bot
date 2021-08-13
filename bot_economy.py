@@ -44,7 +44,7 @@ def banqueiro_retirar(usuario, qtd):
     with open('banco.json', 'w') as f:
         json.dump(geral, f, indent=2)
     
-    return f'{qtd} {CURRENCY} retiradas da conta de {usuario[2]}'
+    return f'{qtd} {CURRENCY} retiradas da conta de {usuario[2]}. Novo saldo: {geral[str(usuario[0])]["quantia"]}'
 
 def banqueiro_adicionar(usuario, qtd):
     banqueiro_registro(usuario)
@@ -55,7 +55,7 @@ def banqueiro_adicionar(usuario, qtd):
     with open('banco.json', 'w') as f:
         json.dump(geral, f, indent=2)
     
-    return f'{qtd} {CURRENCY} adicionadas a conta de {usuario[2]}'
+    return f'{qtd} {CURRENCY} adicionadas a conta de {usuario[2]}. Novo saldo: {geral[str(usuario[0])]["quantia"]}'
 
 def banqueiro_transferir(usuario, qtd, membro):
     condicao = segurança_do_banco(qtd, usuario)
