@@ -75,16 +75,16 @@ def jogatina_1v1(usuario, q=None):
             return condicao[1]
         
         data['qb']['players']['2'] = usuario
-        decisao = randint(1,100)
+        decisao = randint(1,2)
         
-        if decisao > 50:
+        if decisao == 1:
             winner = data["qb"]["players"]['1']
             loser = data['qb']['players']['2']
             resposta.append(f'Vencedor: {winner[2]}!')
             resposta.append(bot_economy.banqueiro_retirar(loser, apostado))
             resposta.append(bot_economy.banqueiro_adicionar(winner, apostado))
         
-        elif decisao < 50:
+        elif decisao == 2:
             winner = data["qb"]["players"]['2']
             loser = data['qb']['players']['1']
             resposta.append(f'Vencedor: {winner[2]}!')
@@ -105,4 +105,3 @@ def reseta_qb():
     
     with open('games.json','w') as f:
         json.dump(data, f, indent=2)
-

@@ -76,7 +76,7 @@ async def banco_reset(ctx, *, nome:discord.Member):
     
     await ctx.send('resetado')
 
-@client.command(aliases=['joinv1'])
+@client.command(aliases=['x1'])
 async def jogo_1v1(ctx, q=None):
     user = [ctx.author.id, ctx.author.name, ctx.author.mention]
     resposta = bot_games.jogatina_1v1(user, q)
