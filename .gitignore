@@ -6,3 +6,11 @@ banco.json
 requirements.txt
 Procfile
 games.json
+__pycache__/bot_pokemon.cpython-39.pyc
+__pycache__/bot_pokemon_loja.cpython-39.pyc
+cad_lista.py
+cad_pok.py
+loja.txt
+loja.json
+pokemon_bag.json
+pokemons.json

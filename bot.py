@@ -3,6 +3,8 @@ import discord
 import json
 import bot_economy
 import bot_games
+import bot_pokemon_loja
+import bot_pokemon
 from dotenv import load_dotenv
 from discord import client
 from discord.ext import commands
@@ -89,5 +91,36 @@ async def qb_reset(ctx):
     bot_games.reseta_qb()
 
     await ctx.send('resetado')
+
+@client.command(aliases=['registro'])
+async def poke_registro(ctx):
+    user = [ctx.author.id, ctx.author.name, ctx.author.mention]
+    resposta = bot_pokemon_loja.poke_reg(user)
+    
+    await ctx.send(resposta)
+
+@client.command(aliases=['pokeloja'])
+async def poke_loja(ctx, code=None, qtd=None):
+    user = [ctx.author.id, ctx.author.name, ctx.author.mention]
+    resposta = bot_pokemon_loja.poke_loja(user, code, qtd)
+
+    await ctx.send(resposta)
+
+@client.command(aliases=['inicial'])
+async def poke_inicial(ctx, nome=None):
+    user = [ctx.author.id, ctx.author.name, ctx.author.mention]
+    resposta = bot_pokemon.poke_inicial(user, nome)
+
+    await ctx.send(resposta)
+
+@client.command(aliases=['time'])
+async def poke_time(ctx):
+    user = [ctx.author.id, ctx.author.name, ctx.author.mention]
+    time_pokemon = bot_pokemon.poke_time(user)
+    msg = ''
+    for i in time_pokemon:
+        msg += f'{i[0]:<30}Level: {i[1]}\n'
+
+    await ctx.send(msg)
 
 client.run(token)
